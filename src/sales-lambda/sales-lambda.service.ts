@@ -10,6 +10,8 @@ import { SalesCompanyDto, SalesProductDto } from 'src/sales/dto';
 import { SalesResponseDto } from 'src/sales/dto/sales-response-dto';
 import { SalesCompanyService } from 'src/sales/sales-company.service';
 import { SalesProductService } from 'src/sales/sales-product.service';
+import { SalesProductTypeService } from 'src/sales/sales-product-type.service';
+import { SalesProductTypeDto } from 'src/sales/dto/sales-product-type.dto';
 
 @Injectable()
 export class SalesLambdaService {
@@ -18,7 +20,8 @@ export class SalesLambdaService {
 
   constructor(
     private readonly salesCompanyService: SalesCompanyService,
-    private readonly salesProductService: SalesProductService
+    private readonly salesProductService: SalesProductService,
+    private readonly salesProductTypeService: SalesProductTypeService
   ) {}
 
   async processEvent(event: Event): Promise<any> {
@@ -79,7 +82,7 @@ export class SalesLambdaService {
       if(messageDto.process == ProcessEnum.COMPANY_UPDATE) {
         const dto: SalesCompanyDto = JSON.parse(messageDto.jsonData);
 
-        return this.salesCompanyService.updateCompany(dto)
+        return this.salesCompanyService.update(dto)
         .then( (responseDto: SalesResponseDto) => {
           return responseDto;
         })
@@ -88,7 +91,7 @@ export class SalesLambdaService {
       if(messageDto.process == ProcessEnum.COMPANY_DELETE) {
         const dto: SalesCompanyDto = JSON.parse(messageDto.jsonData);
 
-        return this.salesCompanyService.deleteCompany(dto.id)
+        return this.salesCompanyService.delete(dto.id)
         .then( (responseDto: SalesResponseDto) => {
           return responseDto;
         })
@@ -98,7 +101,7 @@ export class SalesLambdaService {
       if(messageDto.process == ProcessEnum.PRODUCT_UPDATE) {
         const dto: SalesProductDto = JSON.parse(messageDto.jsonData);
 
-        return this.salesProductService.updateProduct(dto)
+        return this.salesProductService.update(dto)
         .then( (responseDto: SalesResponseDto) => {
           return responseDto;
         })
@@ -107,7 +110,26 @@ export class SalesLambdaService {
       if(messageDto.process == ProcessEnum.PRODUCT_DELETE) {
         const dto: SalesProductDto = JSON.parse(messageDto.jsonData);
 
-        return this.salesProductService.deleteProduct(dto.id)
+        return this.salesProductService.delete(dto.id)
+        .then( (responseDto: SalesResponseDto) => {
+          return responseDto;
+        })
+      }
+
+      // * replicate product types to sales
+      if(messageDto.process == ProcessEnum.PRODUCT_TYPE_UPDATE) {
+        const dto: SalesProductTypeDto = JSON.parse(messageDto.jsonData);
+
+        return this.salesProductTypeService.update(dto)
+        .then( (responseDto: SalesResponseDto) => {
+          return responseDto;
+        })
+      }
+
+      if(messageDto.process == ProcessEnum.PRODUCT_TYPE_DELETE) {
+        const dto: SalesProductTypeDto = JSON.parse(messageDto.jsonData);
+
+        return this.salesProductTypeService.delete(dto.id)
         .then( (responseDto: SalesResponseDto) => {
           return responseDto;
         })

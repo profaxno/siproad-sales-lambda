@@ -5,6 +5,6 @@ export const config = () => ({
     executionRetries: +process.env.EXECUTION_RETRIES || 2,
     executionBaseDelay: +process.env.EXECUTION_BASE_DELAY || 1000,
 
-    siproadSalesHost: process.env.SIPROAD_ORDERS_HOST,
-    siproadSalesApiKey: process.env.SIPROAD_ORDERS_API_KEY
+    siproadSalesHost: process.env.SIPROAD_SALES_HOST,
+    siproadSalesApiKey: process.env.SIPROAD_SALES_API_KEY
   })

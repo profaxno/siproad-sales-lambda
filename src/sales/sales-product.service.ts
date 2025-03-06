@@ -22,7 +22,7 @@ export class SalesProductService {
     this.siproadSalesApiKey = this.configService.get('siproadSalesApiKey');
   }
 
-  updateProduct(dto: SalesProductDto): Promise<SalesResponseDto>{
+  update(dto: SalesProductDto): Promise<SalesResponseDto>{
     const start = performance.now();
 
     // * generate request values
@@ -39,19 +39,19 @@ export class SalesProductService {
         response.internalCode == HttpStatus.OK || 
         response.internalCode == HttpStatus.BAD_REQUEST || 
         response.internalCode == HttpStatus.NOT_FOUND) )
-        throw new Error(`updateProduct: Error, response=${JSON.stringify(response)}`);
+        throw new Error(`update: Error, response=${JSON.stringify(response)}`);
 
       const end = performance.now();
-      this.logger.log(`updateProduct: OK, runtime=${(end - start) / 1000} seconds`);
+      this.logger.log(`update: OK, runtime=${(end - start) / 1000} seconds`);
       return response;
     })
     .catch(error => {
-      this.logger.error(`updateProduct: ${error}`);
+      this.logger.error(`update: ${error}`);
       throw error;
     })
   }
 
-  deleteProduct(id: string): Promise<SalesResponseDto>{
+  delete(id: string): Promise<SalesResponseDto>{
     const start = performance.now();
 
     // * generate request values
@@ -69,14 +69,14 @@ export class SalesProductService {
         response.internalCode == HttpStatus.CREATED || 
         response.internalCode == HttpStatus.BAD_REQUEST || 
         response.internalCode == HttpStatus.NOT_FOUND) )
-        throw new Error(`deleteProduct: Error, response=${JSON.stringify(response)}`);
+        throw new Error(`delete: Error, response=${JSON.stringify(response)}`);
 
       const end = performance.now();
-      this.logger.log(`deleteProduct: OK, runtime=${(end - start) / 1000} seconds`);
+      this.logger.log(`delete: OK, runtime=${(end - start) / 1000} seconds`);
       return response;
     })
     .catch(error => {
-      this.logger.error(`deleteProduct: ${error}`);
+      this.logger.error(`delete: ${error}`);
       throw error;
     })
   }
