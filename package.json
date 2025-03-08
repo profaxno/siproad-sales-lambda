@@ -19,15 +19,14 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "delete-lambda-zip": "if exist siproad-sales-lambda.zip del /F /Q siproad-sales-lambda.zip",
-    "build-lambda": "npm install && npm run build && npm prune --production && npm run delete-lambda-zip && 7z a -r siproad-sales-lambda.zip dist node_modules .env package.json && npm install",
-    "publish-lambda": "sh init-resources.sh"
+    "build-lambda": "npm install && npm run build && npm prune --production && npm run delete-lambda-zip && 7z a -r siproad-sales-lambda.zip dist node_modules .env package.json && npm install"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
     "aws-lambda": "^1.0.7",
-    "profaxnojs": "^1.0.39",
+    "profaxnojs": "^1.0.43",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
   },

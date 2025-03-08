@@ -1,15 +1,13 @@
-import { PfxHttpMethodEnum, PfxHttpService } from 'profaxnojs/axios';
+import { PfxHttpMethodEnum, PfxHttpService, PfxHttpResponseDto } from 'profaxnojs/axios';
 
 import { HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { SalesResponseDto } from './dto/sales-response-dto';
-import { SalesCompanyDto } from './dto/sales-company.dto';
-import { SalesEnum } from './enum/sales.enum';
+import { SalesEnum } from './enums/sales.enum';
 
 @Injectable()
-export class SalesCompanyService {
-  private readonly logger = new Logger(SalesCompanyService.name);
+export class SalesService {
+  private readonly logger = new Logger(SalesService.name);
 
   private siproadSalesHost: string = null;
   private siproadSalesApiKey: string = null;
@@ -22,17 +20,17 @@ export class SalesCompanyService {
     this.siproadSalesApiKey = this.configService.get('siproadSalesApiKey');
   }
 
-  update(dto: SalesCompanyDto): Promise<SalesResponseDto>{
+  update<T>(subPath: SalesEnum, dto: T): Promise<PfxHttpResponseDto>{
     const start = performance.now();
 
     // * generate request values
     const method  = PfxHttpMethodEnum.PATCH;
-    const path    = this.siproadSalesHost.concat(SalesEnum.PATH_COMPANY_UPDATE);
+    const path    = this.siproadSalesHost.concat(subPath);
     const headers = { "x-api-key": this.siproadSalesApiKey };
     const body    = dto;
 
     // * send request
-    return this.pfxHttpService.request<SalesResponseDto>(method, path, headers, body)
+    return this.pfxHttpService.request<PfxHttpResponseDto>(method, path, headers, body)
     .then(response => {
 
       if ( !(
@@ -51,17 +49,17 @@ export class SalesCompanyService {
     })
   }
 
-  delete(id: string): Promise<SalesResponseDto>{
+  delete(subPath: SalesEnum, id: string): Promise<PfxHttpResponseDto>{
     const start = performance.now();
 
     // * generate request values
     const method  = PfxHttpMethodEnum.DELETE;
-    const path    = this.siproadSalesHost.concat(SalesEnum.PATH_COMPANY_DELETE).concat(`/${id}`);;
+    const path    = this.siproadSalesHost.concat(subPath).concat(`/${id}`);
     const headers = { "x-api-key": this.siproadSalesApiKey };
     const body    = {};
 
     // * send request
-    return this.pfxHttpService.request<SalesResponseDto>(method, path, headers, body)
+    return this.pfxHttpService.request<PfxHttpResponseDto>(method, path, headers, body)
     .then(response => {
 
       if ( !(

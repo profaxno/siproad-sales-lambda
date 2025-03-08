@@ -1,21 +1,14 @@
-import { IsArray, IsBoolean, IsIn, IsInt, IsNumber, IsOptional, IsPositive, IsString, IsUUID, MaxLength, ValidateNested } from "class-validator";
-
 export class SalesProductTypeDto {
   
-  @IsUUID()
-  @IsOptional()
   id?: string;
 
-  @IsUUID()
   companyId: string;
 
-  @IsString()
-  @MaxLength(45)
-  label: string;
+  name: string;
 
-  constructor(companyId: string, label: string, id?: string) {
+  constructor(companyId: string, name: string, id?: string) {
     this.companyId = companyId;
-    this.label = label;
+    this.name = name;
     this.id = id;
   }
 }
