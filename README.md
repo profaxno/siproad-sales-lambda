@@ -45,7 +45,7 @@ Nota: En la raiz de este repo deben estar los zip de los 2 lambdas, de esta form
 
 ### Configuración AWS (docker)
 * Apuntar el archivo .env a las variables de staging.
-* Crear contenedor de "aws" docker-compose -p aws up -d
+* Crear contenedor de "aws" ```docker-compose -p stg-aws up -d```
 
 ### Configuración manual del lambda (docker)
 * Actualizar node_modules ```npm install```

@@ -6,12 +6,15 @@ export class SalesProductDto {
 
   name: string;
 
+  cost: number;
+
   price: number;
 
-  constructor(companyId: string, name: string, price: number, id?: string) {
+  constructor(companyId: string, name: string, cost: number, price: number, id?: string) {
     this.companyId = companyId;
-    this.name = name;
-    this.price = price;
-    this.id = id;
+    this.name   = name;
+    this.cost   = cost;
+    this.price  = price;
+    this.id     = id;
   }
 }
