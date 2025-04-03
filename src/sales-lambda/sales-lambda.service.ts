@@ -81,8 +81,8 @@ export class SalesLambdaService {
       // * from sns-sqs
         // * replicate companies
       if(message.process == ProcessEnum.COMPANY_UPDATE) {
-        const dto: SalesCompanyDto = JSON.parse(message.jsonData);
-        return this.salesService.update<SalesCompanyDto>(SalesEnum.PATH_COMPANY_UPDATE, dto);
+        const body = JSON.parse(message.jsonData);
+        return this.salesService.update(SalesEnum.PATH_COMPANY_UPDATE, body);
       }
 
       if(message.process == ProcessEnum.COMPANY_DELETE) {
@@ -92,8 +92,8 @@ export class SalesLambdaService {
 
         // * replicate products
       if(message.process == ProcessEnum.PRODUCT_UPDATE) {
-        const dto: SalesProductDto = JSON.parse(message.jsonData);
-        return this.salesService.update<SalesProductDto>(SalesEnum.PATH_PRODUCTS_UPDATE, dto);
+        const body = JSON.parse(message.jsonData);
+        return this.salesService.update(SalesEnum.PATH_PRODUCTS_UPDATE, body);
       }
 
       if(message.process == ProcessEnum.PRODUCT_DELETE) {
@@ -102,10 +102,10 @@ export class SalesLambdaService {
       }
 
 
-        // * replicate product
+        // * replicate product type
       if(message.process == ProcessEnum.PRODUCT_TYPE_UPDATE) {
-        const dto: SalesProductTypeDto = JSON.parse(message.jsonData);
-        return this.salesService.update<SalesProductTypeDto>(SalesEnum.PATH_PRODUCT_TYPES_UPDATE, dto);
+        const body = JSON.parse(message.jsonData);
+        return this.salesService.update(SalesEnum.PATH_PRODUCT_TYPES_UPDATE, body);
       }
 
       if(message.process == ProcessEnum.PRODUCT_TYPE_DELETE) {
@@ -116,8 +116,8 @@ export class SalesLambdaService {
       // * from sqs
         // * replicate users
       if(message.process == ProcessEnum.USER_UPDATE) {
-        const dto: SalesUserDto = JSON.parse(message.jsonData);
-        return this.salesService.update<SalesUserDto>(SalesEnum.PATH_USERS_UPDATE, dto);
+        const body = JSON.parse(message.jsonData);
+        return this.salesService.update(SalesEnum.PATH_USERS_UPDATE, body);
       }
 
       if(message.process == ProcessEnum.USER_DELETE) {
@@ -133,5 +133,66 @@ export class SalesLambdaService {
       return Promise.reject(error);
     }
   }
+
+  // private processMessage(record: Record): Promise<PfxHttpResponseDto> {
+  //   try {
+  //     const body: any = JSON.parse(record.body);
+  //     const message: Message = body.Message ? JSON.parse(body.Message) : body;  // * TIPS: When a message comes from an SNS the message has a message field, and when it comes from an SQS the body is the message
+
+  //     // * from sns-sqs
+  //       // * replicate companies
+  //     if(message.process == ProcessEnum.COMPANY_UPDATE) {
+  //       const dto: SalesCompanyDto = JSON.parse(message.jsonData);
+  //       return this.salesService.update<SalesCompanyDto>(SalesEnum.PATH_COMPANY_UPDATE, dto);
+  //     }
+
+  //     if(message.process == ProcessEnum.COMPANY_DELETE) {
+  //       const jsonBasic: JsonBasic = JSON.parse(message.jsonData);
+  //       return this.salesService.delete(SalesEnum.PATH_COMPANY_DELETE, jsonBasic.id);
+  //     }
+
+  //       // * replicate products
+  //     if(message.process == ProcessEnum.PRODUCT_UPDATE) {
+  //       const dto: SalesProductDto = JSON.parse(message.jsonData);
+  //       return this.salesService.update<SalesProductDto>(SalesEnum.PATH_PRODUCTS_UPDATE, dto);
+  //     }
+
+  //     if(message.process == ProcessEnum.PRODUCT_DELETE) {
+  //       const jsonBasic: JsonBasic = JSON.parse(message.jsonData);
+  //       return this.salesService.delete(SalesEnum.PATH_PRODUCTS_DELETE, jsonBasic.id);
+  //     }
+
+
+  //       // * replicate product
+  //     if(message.process == ProcessEnum.PRODUCT_TYPE_UPDATE) {
+  //       const dto: SalesProductTypeDto = JSON.parse(message.jsonData);
+  //       return this.salesService.update<SalesProductTypeDto>(SalesEnum.PATH_PRODUCT_TYPES_UPDATE, dto);
+  //     }
+
+  //     if(message.process == ProcessEnum.PRODUCT_TYPE_DELETE) {
+  //       const jsonBasic: JsonBasic = JSON.parse(message.jsonData);
+  //       return this.salesService.delete(SalesEnum.PATH_PRODUCT_TYPES_DELETE, jsonBasic.id);
+  //     }
+    
+  //     // * from sqs
+  //       // * replicate users
+  //     if(message.process == ProcessEnum.USER_UPDATE) {
+  //       const dto: SalesUserDto = JSON.parse(message.jsonData);
+  //       return this.salesService.update<SalesUserDto>(SalesEnum.PATH_USERS_UPDATE, dto);
+  //     }
+
+  //     if(message.process == ProcessEnum.USER_DELETE) {
+  //       const jsonBasic: JsonBasic = JSON.parse(message.jsonData);
+  //       return this.salesService.delete(SalesEnum.PATH_USERS_DELETE, jsonBasic.id);
+  //     }
+
+  //     const response = new PfxHttpResponseDto(HttpStatus.BAD_REQUEST, `process not implemented, source=${message.source}, process=${message.process}`);
+  //     return Promise.resolve(response);
+      
+  //   } catch (error) {
+  //     this.logger.error(`processMessage: error processing message, messageId=${record.messageId}, error`, error);
+  //     return Promise.reject(error);
+  //   }
+  // }
 
 }

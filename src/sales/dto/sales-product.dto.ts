@@ -1,20 +1,23 @@
 export class SalesProductDto {
   
-  id?: string;
+  // id?: string;
 
-  companyId: string;
+  // companyId: string;
 
-  name: string;
+  // name: string;
 
-  cost: number;
+  // code?: string;
 
-  price: number;
+  // cost: number;
 
-  constructor(companyId: string, name: string, cost: number, price: number, id?: string) {
-    this.companyId = companyId;
-    this.name   = name;
-    this.cost   = cost;
-    this.price  = price;
-    this.id     = id;
-  }
+  // price: number;
+
+  // constructor(companyId: string, name: string, cost: number, price: number, id?: string, code?: string) {
+  //   this.companyId = companyId;
+  //   this.name   = name;
+  //   this.code   = code;
+  //   this.cost   = cost;
+  //   this.price  = price;
+  //   this.id     = id;
+  // }
 }

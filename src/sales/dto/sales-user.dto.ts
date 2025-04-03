@@ -1,20 +1,20 @@
 export class SalesUserDto {
   
-  id?: string;
+  // id?: string;
 
-  companyId: string;
+  // companyId: string;
 
-  name: string;
+  // name: string;
 
-  email: string;;
+  // email: string;;
 
-  status?: number;
+  // status?: number;
   
-  constructor(companyId: string, name: string, email: string, id?: string, status?: number) {
-    this.companyId = companyId;
-    this.name = name;
-    this.email = email;
-    this.id = id;
-    this.status = status;
-  }
+  // constructor(companyId: string, name: string, email: string, id?: string, status?: number) {
+  //   this.companyId = companyId;
+  //   this.name = name;
+  //   this.email = email;
+  //   this.id = id;
+  //   this.status = status;
+  // }
 }

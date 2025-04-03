@@ -1,14 +1,14 @@
 export class SalesProductTypeDto {
   
-  id?: string;
+  // id?: string;
 
-  companyId: string;
+  // companyId: string;
 
-  name: string;
+  // name: string;
 
-  constructor(companyId: string, name: string, id?: string) {
-    this.companyId = companyId;
-    this.name = name;
-    this.id = id;
-  }
+  // constructor(companyId: string, name: string, id?: string) {
+  //   this.companyId = companyId;
+  //   this.name = name;
+  //   this.id = id;
+  // }
 }

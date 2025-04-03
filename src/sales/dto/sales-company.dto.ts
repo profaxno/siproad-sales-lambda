@@ -1,11 +1,11 @@
 export class SalesCompanyDto {
   
-  id?: string;
+  // id?: string;
 
-  name: string;
+  // name: string;
 
-  constructor(name: string, id?: string) {
-    this.name = name;
-    this.id = id;
-  }
+  // constructor(name: string, id?: string) {
+  //   this.name = name;
+  //   this.id = id;
+  // }
 }
